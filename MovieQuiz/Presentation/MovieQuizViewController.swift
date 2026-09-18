@@ -9,12 +9,12 @@ final class MovieQuizViewController: UIViewController {
         show(quiz: viewModel)
         
     }
-    struct QuizQuestion{
+   private struct QuizQuestion{
         let image: String;
         let text: String;
         let correctAnswer: Bool;
     }
-    struct QuizResultsViewModel {
+    private struct QuizResultsViewModel {
       let title: String
       let text: String
       let buttonText: String
@@ -44,7 +44,7 @@ final class MovieQuizViewController: UIViewController {
     ]
     
     
-    @IBAction func noButtonClicked(_ sender: UIButton) {
+    @IBAction private func noButtonClicked(_ sender: UIButton) {
         let currentQuestion = questions[currentQuestionIndex]
         let givenAnswer = false
         
@@ -52,7 +52,7 @@ final class MovieQuizViewController: UIViewController {
         
     }
     
-    @IBAction func yesButtonCLicked(_ sender: UIButton) {
+    @IBAction private func yesButtonCLicked(_ sender: UIButton) {
         let currentQuestion = questions[currentQuestionIndex]
         let givenAnswer = true
         
@@ -60,14 +60,14 @@ final class MovieQuizViewController: UIViewController {
     }
     
     @IBOutlet private var imageView: UIImageView!
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var counterLabel: UILabel!
+    @IBOutlet private weak var textLabel: UILabel!
+    @IBOutlet private weak var counterLabel: UILabel!
     
     private var currentQuestionIndex = 0;
     
     private var correctAnswers = 0;
     
-    struct QuizStepViewModel{
+    private struct QuizStepViewModel{
         let image: UIImage;
         let question: String;
         let questionNumber: String;
@@ -109,9 +109,6 @@ final class MovieQuizViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    let green = UIColor(named: "YPGreen")!.cgColor
-    let red = UIColor(named: "YPRed")!.cgColor
-    
     private func showAnswerResult(isCorrect:Bool){
         if isCorrect{
             correctAnswers += 1
@@ -119,7 +116,7 @@ final class MovieQuizViewController: UIViewController {
         
         imageView.layer.masksToBounds = true
         imageView.layer.borderWidth = 8
-        imageView.layer.borderColor = isCorrect ? UIColor.green.cgColor : UIColor.red.cgColor
+        imageView.layer.borderColor = isCorrect ? UIColor(named: "YPGreen")!.cgColor: UIColor(named:"YPRed")!.cgColor
         imageView.layer.cornerRadius = 20
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
