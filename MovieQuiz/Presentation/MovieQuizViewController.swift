@@ -53,7 +53,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     private var currentQuestionIndex: Int = 0
     private var correctAnswers: Int = 0
     
-    private var alertPresenter = AlertPresenter()
+    private var alertPresenter = ResultAlertPresenter()
+    
+    private var statisticService: StatisticServiceProtocol = StatisticService()
     
     // MARK: - Convert
     
@@ -79,9 +81,23 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     }
     
     private func show(quiz result: QuizResultsViewModel) {
+        statisticService.store(correct: correctAnswers, total: questionsAmount)
+        
+        let bestGame = statisticService.bestGame
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "dd.MM.yy HH:mm"
+        let dateString = dateFormater.string(from: bestGame.date)
+        
+        let message = """
+        Ваш результат: \(correctAnswers)/\(questionsAmount)
+        Количество сыгранных квизов: \(statisticService.gameCount)
+        Рекорд: \(bestGame.correct)/\(bestGame.total) (\(dateString))
+        Средняя точность: \(String(format: "%.2f", statisticService.totalAccurancy))%
+        """
+        
         let model = AlertModel(
             title: result.title,
-            message: result.text,
+            message: message,
             buttonText: result.buttonText
         ) { [weak self] in
             guard let self = self else { return }
@@ -122,12 +138,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     
     private func showNextQuestionOrResults() {
         if currentQuestionIndex == questionsAmount - 1 {
-            let text = correctAnswers == questionsAmount
-                ? "Поздравляем, вы ответили на 10 из 10!"
-                : "Вы ответили на \(correctAnswers) из 10, попробуйте ещё раз!"
             let viewModel = QuizResultsViewModel(
                 title: "Этот раунд закончен!",
-                text: text,
+                text: "",
                 buttonText: "Сыграть еще раз")
             show(quiz: viewModel)
         } else {

@@ -42,7 +42,7 @@ final class QuestionFactory: QuestionFactoryProtocol{
     } 
     subscript(index: Int) -> Int {
         get {
-            index //добавил сам
+            index
         }
         set(newValue) {
             
