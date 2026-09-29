@@ -81,17 +81,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     }
     
     private func show(quiz result: QuizResultsViewModel) {
-        statisticService.store(correct: correctAnswers, total: questionsAmount)
-        
         let bestGame = statisticService.bestGame
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "dd.MM.yy HH:mm"
-        let dateString = dateFormater.string(from: bestGame.date)
+        statisticService.store(correct: correctAnswers, total: questionsAmount)
         
         let message = """
         Ваш результат: \(correctAnswers)/\(questionsAmount)
         Количество сыгранных квизов: \(statisticService.gameCount)
-        Рекорд: \(bestGame.correct)/\(bestGame.total) (\(dateString))
+        Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))
         Средняя точность: \(String(format: "%.2f", statisticService.totalAccurancy))%
         """
         

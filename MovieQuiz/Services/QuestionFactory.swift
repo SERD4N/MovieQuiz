@@ -39,16 +39,7 @@ final class QuestionFactory: QuestionFactoryProtocol{
 
         let question = questions[safe: index]
         delegate?.didReceiveNextQuestion(question: question)
-    } 
-    subscript(index: Int) -> Int {
-        get {
-            index
-        }
-        set(newValue) {
-            
-        }
     }
-    
 }
 
 
