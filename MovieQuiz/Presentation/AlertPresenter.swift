@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-
 final class ResultAlertPresenter{
     func show(in vc: UIViewController, model: AlertModel) {
         let alert = UIAlertController(

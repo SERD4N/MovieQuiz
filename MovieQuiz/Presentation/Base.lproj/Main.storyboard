@@ -46,13 +46,13 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Qxy-Mi-0Mk" userLabel="Preview Image">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="Qxy-Mi-0Mk" userLabel="Preview Image">
                                         <rect key="frame" x="0.0" y="43.666666666666657" width="353" height="458.33333333333337"/>
                                         <color key="backgroundColor" name="YPWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Qxy-Mi-0Mk" secondAttribute="height" multiplier="2:3" priority="750" id="L5S-Er-dmT"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="200" id="RLd-AP-rn4"/>
-                                            <constraint firstAttribute="height" constant="500" id="gle-Ub-L6A"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" priority="750" constant="500" id="gle-Ub-L6A" userLabel="height &lt;= 500"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

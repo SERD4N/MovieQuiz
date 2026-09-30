@@ -81,8 +81,8 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     }
     
     private func show(quiz result: QuizResultsViewModel) {
-        let bestGame = statisticService.bestGame
         statisticService.store(correct: correctAnswers, total: questionsAmount)
+        let bestGame = statisticService.bestGame
         
         let message = """
         Ваш результат: \(correctAnswers)/\(questionsAmount)
