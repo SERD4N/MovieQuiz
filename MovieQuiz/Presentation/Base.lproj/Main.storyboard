@@ -114,17 +114,31 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="3L3-y6-KSV">
+                                <rect key="frame" x="196.66666666666666" y="426" width="0.0" height="0.0"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" id="e8i-V1-MCp"/>
+                                    <constraint firstAttribute="width" id="fTF-XJ-iTB"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YPBlack"/>
                         <constraints>
+                            <constraint firstItem="3L3-y6-KSV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9Zj-ls-Hlg"/>
+                            <constraint firstItem="3L3-y6-KSV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DJM-hb-kYk"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="lW2-FN-dDR" secondAttribute="bottom" id="GIX-99-9ds"/>
+                            <constraint firstItem="3L3-y6-KSV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Kak-DU-ufR"/>
                             <constraint firstItem="lW2-FN-dDR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="TSk-fi-TrS"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lW2-FN-dDR" secondAttribute="trailing" constant="20" id="Zmh-Pu-V6V"/>
                             <constraint firstItem="lW2-FN-dDR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ZrR-Vp-XhB"/>
+                            <constraint firstItem="3L3-y6-KSV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eTR-EZ-Amm"/>
+                            <constraint firstItem="3L3-y6-KSV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="uoB-pl-E9S"/>
+                            <constraint firstItem="3L3-y6-KSV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="w9q-nC-eVW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="3L3-y6-KSV" id="hGV-pe-Yd4"/>
                         <outlet property="counterLabel" destination="eF0-kV-VXP" id="UuD-pp-oJx"/>
                         <outlet property="imageView" destination="Qxy-Mi-0Mk" id="Ipp-6C-1GO"/>
                         <outlet property="noButtonClicked" destination="S9R-F8-kox" id="75d-ap-vwp"/>
