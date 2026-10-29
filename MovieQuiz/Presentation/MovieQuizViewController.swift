@@ -18,14 +18,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     // MARK: - QuestionFactoryDelegate
     
     func didReceiveNextQuestion(question: QuizQuestion?) {
-        guard let question = question else { return }
-        
-        currentQuestion = question
-        let viewModel = presenter.convert(model: question)
-        
-        DispatchQueue.main.async { [weak self] in
-            self?.show(quiz: viewModel)
-        }
+        presenter.didReceiveNextQuestion(question: question)
     }
     
     // MARK: - Actions
@@ -33,13 +26,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
-        presenter.currentQuestion = currentQuestion
         presenter.noButtonClicked()
     }
     
     @IBAction private func yesButtonCLicked(_ sender: UIButton) {
-        presenter.currentQuestion = currentQuestion
-        presenter.yesButtonCLicked()
+        presenter.yesButtonClicked()
     }
     @IBOutlet private weak var noButtonClicked: UIButton!
     @IBOutlet private weak var yesButtonCliked: UIButton!
@@ -58,7 +49,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     private let presenter = MovieQuizPresenter()
     
     private var questionFactory: QuestionFactoryProtocol?
-    private var currentQuestion: QuizQuestion?
+    
     private var correctAnswers: Int = 0
     
     private var alertPresenter = ResultAlertPresenter()
@@ -100,10 +91,13 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     }
         
     
-    private func show(quiz step: QuizStepViewModel) {
+    func show(quiz step: QuizStepViewModel) {
         imageView.image = UIImage(data: step.image) ?? UIImage()
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
+        
+        noButtonClicked.isEnabled = true
+        yesButtonCliked.isEnabled = true
         
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 20
@@ -111,7 +105,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
         imageView.layer.borderColor = nil
     }
     
-    private func show(quiz result: QuizResultsViewModel) {
+    func show(quiz result: QuizResultsViewModel) {
         statisticService.store(correct: correctAnswers, total: presenter.questionsAmount)
         let bestGame = statisticService.bestGame
         
@@ -157,9 +151,9 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
-            self.showNextQuestionOrResults()
-            self.noButtonClicked.isEnabled = true
-            self.yesButtonCliked.isEnabled = true
+            self.presenter.correctAnswers = self.correctAnswers
+            self.presenter.questionFactory = self.questionFactory
+            self.presenter.showNextQuestionOrResults()
         }
     }
     
