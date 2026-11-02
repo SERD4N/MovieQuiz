@@ -64,8 +64,9 @@ class MovieQuizUITests: XCTestCase {
     func testGameFinish() {
         sleep(2)
         for _ in 1...10 {
+            XCTAssertTrue(app.buttons["No"].waitForExistence(timeout: 5))
             app.buttons["No"].tap()
-            sleep(2)
+            sleep(1)
         }
 
         let alert = app.alerts["Game results"]
@@ -78,8 +79,9 @@ class MovieQuizUITests: XCTestCase {
     func testAlertDismiss() {
         sleep(2)
         for _ in 1...10 {
+            XCTAssertTrue(app.buttons["No"].waitForExistence(timeout: 5))
             app.buttons["No"].tap()
-            sleep(2)
+            sleep(1)
         }
         
         let alert = app.alerts["Game results"]

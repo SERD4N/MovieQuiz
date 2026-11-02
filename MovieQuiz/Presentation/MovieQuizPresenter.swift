@@ -138,9 +138,9 @@ final class MovieQuizPresenter: QuestionFactoryDelegate{
         if self.isLastQuestion() {
             
             let viewModel = QuizResultsViewModel(
-                title: "Этот раунд закончен!",
+                title: "Этот раунд окончен!",
                 text: makeResultsMessage(),
-                buttonText: "Сыграть еще раз")
+                buttonText: "Сыграть ещё раз")
                 viewController?.show(quiz: viewModel)
         } else {
             self.switchToNextQuestion()
